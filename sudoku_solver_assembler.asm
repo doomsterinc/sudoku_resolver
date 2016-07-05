@@ -54,14 +54,7 @@ global main
     pop    ebp                       ;
 %endmacro                            ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-;-------------------------------------------------------------------------------
-; main - Call the guess() function and print the resulting board. If no solution
-;        exists, the board will be printed as it is (with zeroes)
-;
-; Last update : 06/09/2005
-; Args        : None
-; Action      : Call guess(), print the board and exit cleanly.
-;-------------------------------------------------------------------------------
+
 main:
     setup_stack_frame                ; Set up stack frame
 
@@ -79,16 +72,7 @@ main:
     destroy_stack_frame              ; Destroy stack frame
     ret                              ; Return
 
-;-------------------------------------------------------------------------------
-; guess - Test all candidate numbers for the current cell until the board is
-;         complete
-;
-; Last update : 06/09/2005
-; Args        : offset (at [ebp + 8]) - Offset of the cell to guess
-; Action      : Loop on numbers from 9 to 1 to find candidates for the current
-;               cell. If none is found, return RET_FAIL. Otherwise go on to the
-;               next cell.
-;-------------------------------------------------------------------------------
+
 guess:
     setup_stack_frame                ; Set up stack frame
 
@@ -150,17 +134,7 @@ guess:
         destroy_stack_frame          ; Destroy the stack frame
         ret                          ; Return
 
-;-------------------------------------------------------------------------------
-; check - Check if a number is, according to Sudoku rules, a legal candidate for
-;         the given cell
-;
-; Last update : 06/09/2005
-; Args        : num (at [ebp + 8])  - Number to check
-;               row (at [ebp + 12]) - Cell's row index
-;               col (at [ebp + 16]) - Cell's column index
-; Action      : Return RET_FAIL if the number already appears in the row, column
-;               or 3x3 box the cell belongs to. Otherwise return RET_OK.
-;-------------------------------------------------------------------------------
+
 check:
     setup_stack_frame                ; Set up stack frame
 
@@ -231,15 +205,7 @@ check:
         destroy_stack_frame          ; Destroy stack frame
         ret                          ; Return
 
-;-------------------------------------------------------------------------------
-; print_board - Print the Sudoku board
-;
-; Last update : 06/09/2005
-; Args        : None
-; Action      : Read board rows pushing each number on the stack and print them.
-;               Rows are read from right to left to push printf arguments in
-;               reverse order
-;-------------------------------------------------------------------------------
+
 print_board:
     setup_stack_frame                ; Set up stack frame
 
